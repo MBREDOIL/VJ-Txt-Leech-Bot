@@ -161,15 +161,11 @@ async def upload(bot: Client, m: Message):
 
 
 
+            
+
+
+
             if "jw-prod" in url:
-                ytf = f"b[height<={raw_text2}][ext=mp4]/bv[height<={raw_text2}][ext=mp4]+ba[ext=m4a]/b[ext=mp4]"
-            else:
-                ytf = f"b[height<={raw_text2}]/bv[height<={raw_text2}]+ba/b/bv+ba"
-
-
-
-
-            if "jw-1ui1prod" in url:
                 cmd = f'yt-dlp -o "{name}.mp4" "{url}"'
             else:
                 cmd = f'yt-dlp -f "{ytf}" "{url}" -o "{name}.mp4"'
@@ -177,7 +173,7 @@ async def upload(bot: Client, m: Message):
             try:  
                 
                 cc = f'**[📽️] Vid_ID:** {str(count).zfill(3)}. {𝗻𝗮𝗺𝗲𝟭}.mkv \n**𝔹ᴀᴛᴄʜ** » **{raw_text0}**\n**DOWNLOADED BY {MR}**'
-                cc1 = f'**[📁] Pdf_ID:** {str(count).zfill(3)}. {𝗻𝗮𝗺𝗲𝟭}.pdf \n**𝔹ᴀᴛᴄʜ** » **{raw_text0}**\n**DOWNLOADED BY {MR}**'
+                cc1 = f'**[📁] Pdf_ID:** {str(count).zfill(3)}. {𝗻𝗮𝗺𝗲𝟭}.pdf \n**𝔹ᴀᴛᴄʜ** » **{raw_text0}**\n**Downloaded BY {MR}**'
                 if "drive" in url:
                     try:
                         ka = await helper.download(url, name)
