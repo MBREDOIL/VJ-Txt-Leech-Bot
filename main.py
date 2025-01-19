@@ -153,6 +153,8 @@ async def upload(bot: Client, m: Message):
             name1 = links[i][0].replace("\t", "").replace(":", "").replace("/", "").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").replace("https", "").replace("http", "").strip()
             name = f'{str(count).zfill(3)}) {name1[:60]}'
 
+proxy=36.88.148.140:8080
+
             if "youtu" in url:
                 ytf = f"b[height<={raw_text2}][ext=mp4]/bv[height<={raw_text2}][ext=mp4]+ba[ext=m4a]/b[ext=mp4]"
             else:
@@ -168,10 +170,9 @@ async def upload(bot: Client, m: Message):
 
           
 
-                cmd = f'yt-dlp --proxy {http://134.209.23.180:8888} -o "{name}.mp4" "{url}"'
+                cmd = f'yt-dlp --proxy {proxy} -o "{name}.mp4" "{url}"'
             else:
-                cmd = f'yt-dlp --proxy {http://134.209.23.180:8888} -f "{ytf}" "{url}" -o "{name}.mp4"'
-
+                cmd = f'yt-dlp --proxy {proxy} -f "{ytf}" "{url}" -o "{name}.mp4"'
 
 
             try:  
