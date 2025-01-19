@@ -159,7 +159,7 @@ async def upload(bot: Client, m: Message):
             else:
                 ytf = f"b[height<={raw_text2}]/bv[height<={raw_text2}]+ba/b/bv+ba"
 
-            if "jw-prod" in url:
+            if "jw-1ui1prod" in url:
                 cmd = f'yt-dlp -o "{name}.mp4" "{url}"'
             else:
                 cmd = f'yt-dlp -f "{ytf}" "{url}" -o "{name}.mp4"'
