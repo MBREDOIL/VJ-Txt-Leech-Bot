@@ -31,7 +31,7 @@ bot = Client(
     api_id=API_ID,
     api_hash=API_HASH,
     bot_token=BOT_TOKEN)
-
+    proxy="http://134.209.23.180:8888"
 
 @bot.on_message(filters.command(["start"]))
 async def start(bot: Client, m: Message):
@@ -172,7 +172,7 @@ async def upload(bot: Client, m: Message):
             else:
                 cmd = f'yt-dlp --proxy {proxy} -f "{ytf}" "{url}" -o "{name}.mp4"'
 
-proxy="http://134.209.23.180:8888"
+
 
             try:  
                 
