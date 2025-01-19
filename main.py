@@ -31,8 +31,7 @@ bot = Client(
     api_id=API_ID,
     api_hash=API_HASH,
     bot_token=BOT_TOKEN)
-    proxy="http://134.209.23.180:8888"
-
+    
 @bot.on_message(filters.command(["start"]))
 async def start(bot: Client, m: Message):
     await m.reply_text(f"<b>Hello {m.from_user.mention} 👋\n\n I Am A Bot For Download Links From Your **.TXT** File And Then Upload That File On Telegram So Basically If You Want To Use Me First Send Me /upload Command And Then Follow Few Steps..\n\nUse /stop to stop any ongoing task.</b>")
@@ -167,6 +166,7 @@ async def upload(bot: Client, m: Message):
 
             if "jw-prod" in url:
 
+            proxy=http://134.209.23.180:8888
 
                 cmd = f'yt-dlp --proxy {proxy} -o "{name}.mp4" "{url}"'
             else:
