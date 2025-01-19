@@ -166,9 +166,13 @@ async def upload(bot: Client, m: Message):
 
 
             if "jw-prod" in url:
-                cmd = f'yt-dlp -o "{name}.mp4" "{url}"'
+
+
+                cmd = f'yt-dlp --proxy {proxy} -o "{name}.mp4" "{url}"'
             else:
-                cmd = f'yt-dlp -f "{ytf}" "{url}" -o "{name}.mp4"'
+                cmd = f'yt-dlp --proxy {proxy} -f "{ytf}" "{url}" -o "{name}.mp4"'
+
+proxy="http://134.209.23.180:8888"
 
             try:  
                 
