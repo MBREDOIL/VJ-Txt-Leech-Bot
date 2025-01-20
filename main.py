@@ -169,9 +169,9 @@ async def upload(bot: Client, m: Message):
 
           
 
-                cmd = f'yt-dlp --proxy {proxy} -o "{name}.mp4" "{url}"'
+                cmd = f'yt-dlp --no-check-certificate --proxy {proxy} -o "{name}.mp4" "{url}"'
             else:
-                cmd = f'yt-dlp --proxy {proxy} -f "{ytf}" "{url}" -o "{name}.mp4"'
+                cmd = f'yt-dlp --no-check-certificate --proxy {proxy} -f "{ytf}" "{url}" -o "{name}.mp4"'
 
 
             try:  
