@@ -154,7 +154,7 @@ def time_name():
 
 
 async def download_video(url,cmd, name, proxy):
-    download_cmd = f'{cmd} -R 25 --fragment-retries 25 --external-downloader aria2c --downloader-args "aria2c: -x 16 -j 32"'
+    download_cmd = f'{cmd} -R 25 --fragment-retries 25 --external-downloader aria2c --downloader-args "aria2c: -x 16 -j 32" --proxy {proxy}'
     global failed_counter
     print(download_cmd)
     logging.info(download_cmd)
@@ -162,7 +162,7 @@ async def download_video(url,cmd, name, proxy):
     if "visionias" in cmd and k.returncode != 0 and failed_counter <= 10:
         failed_counter += 1
         await asyncio.sleep(5)
-        await download_video(url, cmd, name)
+        await download_video(url, cmd, name, proxy)
     failed_counter = 0
     try:
         if os.path.isfile(name):
