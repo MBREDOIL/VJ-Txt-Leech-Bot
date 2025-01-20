@@ -13,7 +13,7 @@ import subprocess
 
 import core as helper
 from utils import progress_bar
-from vars import API_ID, API_HASH, BOT_TOKEN, proxy
+from vars import API_ID, API_HASH, BOT_TOKEN
 from aiohttp import ClientSession
 from pyromod import listen
 from subprocess import getstatusoutput
@@ -169,15 +169,15 @@ async def upload(bot: Client, m: Message):
 
           
 
-                cmd = f'yt-dlp --no-check-certificate --proxy {proxy} -o "{name}.mp4" "{url}"'
+                cmd = f'yt-dlp --no-check-certificate -o "{name}.mp4" "{url}"'
             else:
-                cmd = f'yt-dlp --no-check-certificate --proxy {proxy} -f "{ytf}" "{url}" -o "{name}.mp4"'
+                cmd = f'yt-dlp --no-check-certificate -f "{ytf}" "{url}" -o "{name}.mp4"'
 
 
             try:  
                 
-                cc = f'**[📽️] Vid_ID:** {str(count).zfill(3)}. {𝗻𝗮𝗺𝗲𝟭}.mkv \n**𝔹ᴀᴛᴄʜ** » **{raw_text0}**\n**DOWNLOADED BY {MR}**'
-                cc1 = f'**[📁] Pdf_ID:** {str(count).zfill(3)}. {𝗻𝗮𝗺𝗲𝟭}.pdf \n**𝔹ᴀᴛᴄʜ** » **{raw_text0}**\n**Downloaded BY {MR}**'
+                cc = f'**[📽️] Vid_ID:** {str(count).zfill(3)}. {𝗻𝗮𝗺𝗲𝟭}.mkv \n\n**𝔹ᴀᴛᴄʜ** » **{raw_text0}**\n\n**DOWNLOADED BY {MR}**'
+                cc1 = f'**[📁] Pdf_ID:** {str(count).zfill(3)}. {𝗻𝗮𝗺𝗲𝟭}.pdf \n\n**𝔹ᴀᴛᴄʜ** » **{raw_text0}**\n\n**Downloaded BY {MR}**'
                 if "drive" in url:
                     try:
                         ka = await helper.download(url, name)
@@ -203,9 +203,9 @@ async def upload(bot: Client, m: Message):
                         time.sleep(e.x)
                         continue
                 else:
-                    Show = f"**⥥ 🄳🄾🅆🄽🄻🄾🄰🄳🄸🄽🄶⬇️⬇️... »**\n\n**📝Name »** `{name}\n❄Quality » {raw_text2}`\n\n**🔗URL »** `{url} \n\nKya krega URL dekhkar`"
+                    Show = f"**⥥ 🄳🄾🅆🄽🄻🄾🄰🄳🄸🄽🄶⬇️⬇️... »**\n\n**📝Name »** `{name}\n❄Quality » {raw_text2}`\n\n**🔗URL »** `{url} \n\n**Kya krega URL dekhkar**`"
                     prog = await m.reply_text(Show)
-                    res_file = await helper.download_video(url, cmd, name, proxy)
+                    res_file = await helper.download_video(url, cmd, name)
                     filename = res_file
                     await prog.delete(True)
                     await helper.send_vid(bot, m, cc, filename, thumb, name, prog)
