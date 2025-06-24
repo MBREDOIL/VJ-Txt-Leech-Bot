@@ -126,11 +126,11 @@ async def upload(bot: Client, m: Message):
                     time.sleep(e.x)
                     continue
 
-            except Exception as e:
-                await m.reply_text(
-                    f"**downloading Interupted **\n{str(e)}\n**Name** » {name}\n**Link** » `{url}`"
-                )
-                continue
+                except Exception as e:
+                    await m.reply_text(
+                        f"**downloading Interupted **\n{str(e)}\n**Name** » {name}\n**Link** » `{url}`"
+                    )
+                    continue
 
     except Exception as e:
         await m.reply_text(e)
