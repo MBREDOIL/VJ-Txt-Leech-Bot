@@ -106,7 +106,8 @@ async def upload(bot: Client, m: Message):
             name1 = links[i][0].replace("\t", "").replace(":", "").replace("/", "").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").replace("https", "").replace("http", "").strip()
             name = f'{str(count).zfill(3)}) {name1[:60]}'
 
-            cc1 = f'{str(count).zfill(3)}. **{college}**\n\n`{course}`\n\n__{batch}__\n\n**Downloaded BY {MR}**'
+            cc1 = f'{str(count).zfill(3)}. **{college}**\n\n`{course}`\n\n__{batch}__'
+            #cc1 = f'{str(count).zfill(3)}. **{college}**\n\n`{course}`\n\n__{batch}__\n\n**Downloaded BY {MR}**'
             
             if ".pdf" in url:
                 try:
