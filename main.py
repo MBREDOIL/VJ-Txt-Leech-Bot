@@ -1,7 +1,3 @@
-# Don't Remove Credit Tg - @VJ_Botz
-# Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
-# Ask Doubt on telegram @KingVJ01
-
 import os
 import re
 import sys
@@ -43,7 +39,6 @@ async def restart_handler(_, m):
     os.execl(sys.executable, sys.executable, *sys.argv)
 
 
-
 @bot.on_message(filters.command(["upload"]))
 async def upload(bot: Client, m: Message):
     editable = await m.reply_text('𝕤ᴇɴᴅ ᴛxᴛ ғɪʟᴇ ⚡️')
@@ -61,19 +56,16 @@ async def upload(bot: Client, m: Message):
        for i in content:
            links.append(i.split("://", 1))
        os.remove(x)
-            # print(len(links)
     except:
            await m.reply_text("**Invalid file input.**")
            os.remove(x)
            return
     
-   
     await editable.edit(f"**𝕋ᴏᴛᴀʟ ʟɪɴᴋ𝕤 ғᴏᴜɴᴅ ᴀʀᴇ🔗🔗** **{len(links)}**\n\n**𝕊ᴇɴᴅ 𝔽ʀᴏᴍ ᴡʜᴇʀᴇ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ɪɴɪᴛɪᴀʟ ɪ𝕤** **1**")
     input0: Message = await bot.listen(editable.chat.id)
     raw_text = input0.text
     await input0.delete(True)
     
-
     await editable.edit("Now Enter A Caption to add caption on your uploaded file")
     input3: Message = await bot.listen(editable.chat.id)
     raw_text3 = input3.text
@@ -84,18 +76,11 @@ async def upload(bot: Client, m: Message):
     else:
         MR = raw_text3
    
-    await editable.edit("Now send the Thumb url/nEg » https://graph.org/file/ce1723991756e48c35aa1.jpg \n Or if don't want thumbnail send = no")
-    input6 = message = await bot.listen(editable.chat.id)
-    raw_text6 = input6.text
+    await editable.edit("Now send the Thumbnail photo (not URL)")
+    input6: Message = await bot.listen(editable.chat.id, filters=filters.photo)
+    thumb = await input6.download()
     await input6.delete(True)
     await editable.delete()
-
-    thumb = input6.text
-    if thumb.startswith("http://") or thumb.startswith("https://"):
-        getstatusoutput(f"wget '{thumb}' -O 'thumb.jpg'")
-        thumb = "thumb.jpg"
-    else:
-        thumb == "no"
 
     if len(links) == 1:
         count = 1
@@ -104,28 +89,42 @@ async def upload(bot: Client, m: Message):
 
     try:
         for i in range(count - 1, len(links)):
-
-            V = links[i][1].replace("file/d/","uc?export=download&id=").replace("www.youtube-nocookie.com/embed", "youtu.be").replace("?modestbranding=1", "").replace("/view?usp=sharing","") # .replace("mpd","m3u8")
+            V = links[i][1].replace("file/d/","uc?export=download&id=").replace("www.youtube-nocookie.com/embed", "youtu.be").replace("?modestbranding=1", "").replace("/view?usp=sharing","")
             url = "https://" + V
 
+            # Extract parts from the line
+            parts = links[i][0].split(" ||| ")
+            if len(parts) >= 3:
+                college = parts[0].strip()
+                course = parts[1].strip()
+                batch = parts[2].strip()
+            else:
+                college = "University"
+                course = "Unknown Course"
+                batch = "Unknown Batch"
 
             name1 = links[i][0].replace("\t", "").replace(":", "").replace("/", "").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").replace("https", "").replace("http", "").strip()
             name = f'{str(count).zfill(3)}) {name1[:60]}'
 
-                cc1 = f'**[📁] Pdf_ID:** {str(count).zfill(3)}. {𝗻𝗮𝗺𝗲𝟭}.pdf \n\n**𝔹ᴀᴛᴄʜ** » **{raw_text0}**\n\n**Downloaded BY {MR}**'
-                
-                if ".pdf" in url:
-                    try:
-                        cmd = f'yt-dlp --no-check-certificate -o "{name}.pdf" "{url}"'
-                        download_cmd = f"{cmd} -R 25 --fragment-retries 25"
-                        os.system(download_cmd)
-                        copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', caption=cc1)
-                        count += 1
-                        os.remove(f'{name}.pdf')
-                    except FloodWait as e:
-                        await m.reply_text(str(e))
-                        time.sleep(e.x)
-                        continue
+            cc1 = f'{str(count).zfill(3)}. **{college}**\n\n`{course}`\n\n__{batch}__\n\n**Downloaded BY {MR}**'
+            
+            if ".pdf" in url:
+                try:
+                    cmd = f'yt-dlp --no-check-certificate -o "{name}.pdf" "{url}"'
+                    download_cmd = f"{cmd} -R 25 --fragment-retries 25"
+                    os.system(download_cmd)
+                    copy = await bot.send_document(
+                        chat_id=m.chat.id,
+                        document=f'{name}.pdf',
+                        caption=cc1,
+                        thumb=thumb
+                    )
+                    count += 1
+                    os.remove(f'{name}.pdf')
+                except FloodWait as e:
+                    await m.reply_text(str(e))
+                    time.sleep(e.x)
+                    continue
 
             except Exception as e:
                 await m.reply_text(
@@ -135,7 +134,10 @@ async def upload(bot: Client, m: Message):
 
     except Exception as e:
         await m.reply_text(e)
-    await m.reply_text("**𝔻ᴏɴᴇ 𝔹ᴏ𝕤𝕤😎**")
+    finally:
+        if os.path.exists(thumb):
+            os.remove(thumb)
+    await m.reply_text("**𝔻ᴏɴᴇ 𝔹ᴏ𝕤𝕤**")
 
 
 bot.run()
